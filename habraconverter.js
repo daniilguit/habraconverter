@@ -23,8 +23,8 @@ habraconverter = (function () {
 
   function convertElement(element, state, result) {
     var tagName = element.tagName;
-    if (!/H\d/.test(tagName)) {
-      var sourceElement = tagName ? element : element.parentNode;
+    if (!state.inHeader && !tagName) {
+      var sourceElement = element.parentNode;
       var myStyles = getBasicStyles(sourceElement);
       for (var style in state.styles) {
         if (state.styles[style] && !myStyles[style]) {
@@ -35,7 +35,11 @@ habraconverter = (function () {
       }
       state.styles = myStyles;
     }
-    if (/^((H\d)|LI|UL|OL|TABLE|TR|TD)$/.test(tagName)) {
+    if (/^H\d$/.test(tagName)) {
+      state.inHeader = true;
+      simpleWrapChildren(tagName.toLowerCase(), element, state, result);
+      state.inHeader = false;
+    } else if (/^(LI|UL|OL|TABLE|TR|TD)$/.test(tagName)) {
       simpleWrapChildren(tagName.toLowerCase(), element, state, result);
     } else if ('IMG' == tagName) {
       result.push('<img src="' + element.src + '">');
@@ -49,7 +53,7 @@ habraconverter = (function () {
       result.push('<hr/>\n')
     } else {
       convertElements(element.childNodes, state, result);
-      if ('block' == getComputedStyles(element).display) {
+      if ('block' == getComputedStyles(element).display && result.length && !/\n$/.test(result[result.length - 1])) {
         result.push('\n');
       }
     }
@@ -61,8 +65,8 @@ habraconverter = (function () {
 
   }
 
-var NEW_LINE_AFTER_CLOSE_TAG = {table:true, ul:true, ol:true, h1:true, h2:true, h3:true, h4:true, h5:true, h6:true};
-var NEW_LINE_AFTER_OPEN_TAG = {table:true, ul:true, ol:true};
+var NEW_LINE_AFTER_CLOSE_TAG = {table:true, ul:true, ol:true, source:true, li:true,tr:true, h1:true, h2:true, h3:true, h4:true, h5:true, h6:true};
+var NEW_LINE_AFTER_OPEN_TAG = {table:true, ul:true, ol:true, source:true, tr:true};
 
   function simpleWrapChildren(withTag, element, state, result) {
     wrapChildren(

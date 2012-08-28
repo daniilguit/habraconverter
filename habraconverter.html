@@ -38,16 +38,16 @@ w.attachEvent("onload", w.qbaka._ldr);qbaka.key='d124a5c276b4d9f9725425a6e92c83c
 
     <div>
         <p>
-        Хабраконвертер преобразует текст, созданный в текстовом процессоре (Google Docs, Word, или любом другом) в
-        текст, пригодный для публикации статьи на хабре.
+        Хабраконвертер преобразует текст, созданный в текстовом процессоре (Google Docs, Word или любом другом) в
+        размеченный текст, пригодный для публикации статьи на хабре.
         </p>
         <p>
-        Поддерживаются жирный/италик/перечекнутый/подчеркнутый/sup/sub стили, заголовки, списки, таблицы. Чтобы поддержать
+        Поддерживаются жирный/италик/перечекнутый/подчеркнутый/sup/sub стили, ссылки, заголовки, списки, таблицы. Чтобы поддержать
         вставку исходного кода, весь текст с шрифтом Courier New обрамляется тегом source (атрибут lang, правда, придется
         вставлять вручную).
         </p>
         <p>
-        При вставке из Google Docs картинки вставляются с ссылками на хранилище Google-Docs - их стоит перезалить.
+        При вставке из Google Docs картинки вставляются с ссылками на хранилище Google-Docs - просматриваться будут, но стоит их перезалить.
         </p>
         <p>
         <span class="label label-warning">Внимание!</span> К сожалению, конвертация может нарушить форматирование (например, вставить лишние переводы строк). 
@@ -62,11 +62,12 @@ w.attachEvent("onload", w.qbaka._ldr);qbaka.key='d124a5c276b4d9f9725425a6e92c83c
                 <button class="btn" onclick="clearInput()">Очистить</button>
             </div>
             <div class="block-description">Скопируйте сюда текст для конвертации</div>
-            <div class="uneditable-input" id="rich-input" contenteditable="true"></div>
+            <div class="uneditable-input" id="rich-input" contenteditable="true">
+            </div>
         </div>
         <div class="output-block">
             <div class="buttons">
-                <label></label><input type="checkbox" id="format-result-checkbox" checked> Форматировать результат</label>
+                <label></label><input type="checkbox" id="format-result-checkbox"> Форматировать результат</label>
                 <button class="btn" onclick="clearInput()" style="visibility:collapse;">Dummy</button>
             </div>
             <div class="block-description">При клике автоматически выделится весь результат</div>
