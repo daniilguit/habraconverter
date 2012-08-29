@@ -2,7 +2,7 @@
 <html>
     <head>
         <title>Хабраконвертер</title>
-        <link rel="stylesheet" href="//netdna.bootstrapcdn.com/twitter-bootstrap/2.1.0/js/bootstrap.min.js">
+        <link rel="stylesheet" href="//netdna.bootstrapcdn.com/twitter-bootstrap/2.1.0/css/bootstrap-combined.min.css">
         <link rel="stylesheet" href="habraconverter.css">
     </head>
     <body>
@@ -61,7 +61,9 @@
         <script>
             /* Qbaka */
             (function(e,t){e.__qbaka_eh=e.onerror,e.__qbaka_reports=[],e.onerror=function(){e.__qbaka_reports.push(arguments)},e.qbaka={exec:function(e){try{e()}catch(t){}},report:function(){},_ldr:function(){e.qbaka._ldd=!0},customParams:{},set:function(t,n){qbaka.customParams[t]=n},exec:function(e){try{e()}catch(t){qbaka.reportException(t)}},reportException:function(){}};var n=t.createElement("script");n.id="qbaka",n.type="text/javascript",n.async=!0,n.src="//cdn.qbaka.net/reporting.js";var r=t.getElementsByTagName("script")[0];r.parentNode.insertBefore(n,r),e.addEventListener?e.addEventListener("load",e.qbaka._ldr,!1):e.attachEvent("onload",e.qbaka._ldr),qbaka.key="d124a5c276b4d9f9725425a6e92c83c8"})(window,document)
+        </script>
 
+        <script>
             /* Habraconverter */
             function clearInput() {
                 document.getElementById('rich-input').innerHTML = '';
@@ -71,7 +73,9 @@
                 var converted = habraconverter.convert(document.getElementById('rich-input'));
                 document.getElementById('habra-output').value = converted;
             }
-        
+         </script>
+       
+        <script>
             /* Google Analytics */
             var _gaq = _gaq || [];
             _gaq.push(['_setAccount', 'UA-34415115-1']);
