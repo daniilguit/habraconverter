@@ -41,3 +41,6 @@ footer {
     font-size: 10pt;
     padding-bottom: 0.5em;
 }
+footer hr {
+    margin: 0 0 10px 0;
+}

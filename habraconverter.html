@@ -17,7 +17,6 @@ w.attachEvent("onload", w.qbaka._ldr);qbaka.key='d124a5c276b4d9f9725425a6e92c83c
 </script>
 
     <script type="text/javascript" src="habraconverter.js"></script>
-    <script type="text/javascript" src="beautify-html.js"></script>
     <script>
         function clearInput() {
             document.getElementById('rich-input').innerHTML = '';
@@ -25,9 +24,6 @@ w.attachEvent("onload", w.qbaka._ldr);qbaka.key='d124a5c276b4d9f9725425a6e92c83c
 
         function convertInput() {
             var converted = habraconverter.convert(document.getElementById('rich-input'));
-            if (document.getElementById('format-result-checkbox').checked) {
-                converted = style_html(converted);
-            }
             document.getElementById('habra-output').value = converted;
         }
     </script>
@@ -47,7 +43,7 @@ w.attachEvent("onload", w.qbaka._ldr);qbaka.key='d124a5c276b4d9f9725425a6e92c83c
         вставлять вручную).
         </p>
         <p>
-        При вставке из Google Docs картинки вставляются с ссылками на хранилище Google-Docs - просматриваться будут, но стоит их перезалить.
+        При вставке из Google Docs картинки вставляются с ссылками на хранилище Google-Docs — просматриваться будут, но стоит их перезалить.
         </p>
         <p>
         <span class="label label-warning">Внимание!</span> К сожалению, конвертация может нарушить форматирование (например, вставить лишние переводы строк). 
@@ -67,7 +63,6 @@ w.attachEvent("onload", w.qbaka._ldr);qbaka.key='d124a5c276b4d9f9725425a6e92c83c
         </div>
         <div class="output-block">
             <div class="buttons">
-                <label></label><input type="checkbox" id="format-result-checkbox"> Форматировать результат</label>
                 <button class="btn" onclick="clearInput()" style="visibility:collapse;">Dummy</button>
             </div>
             <div class="block-description">При клике автоматически выделится весь результат</div>
@@ -84,5 +79,16 @@ w.attachEvent("onload", w.qbaka._ldr);qbaka.key='d124a5c276b4d9f9725425a6e92c83c
     </span>
     </div>
 </footer>
+<script type="text/javascript">
+  var _gaq = _gaq || [];
+  _gaq.push(['_setAccount', 'UA-34415115-1']);
+  _gaq.push(['_trackPageview']);
+
+  (function() {
+    var ga = document.createElement('script'); ga.type = 'text/javascript'; ga.async = true;
+    ga.src = ('https:' == document.location.protocol ? 'https://ssl' : 'http://www') + '.google-analytics.com/ga.js';
+    var s = document.getElementsByTagName('script')[0]; s.parentNode.insertBefore(ga, s);
+  })();
+</script>
 </body>
 </html>

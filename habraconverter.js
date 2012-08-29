@@ -1,7 +1,17 @@
 habraconverter = (function () {
   function convert(content) {
     var result = [];
-    var state = {styles:{}};
+    var state = {
+      styles:{
+        italic:false,
+        bold:false,
+        underlined:false,
+        strikeout:false,
+        sup:false,
+        sub:false,
+        monospace:false
+      }
+    };
     convertElement(content, state, result);
     for (var style in state.styles) {
       if (state.styles[style]) {
@@ -18,24 +28,17 @@ habraconverter = (function () {
     strikeout:{open:'<s>', close:'</s>'},
     sup:{open:'<sup>', close:'</sup>'},
     sub:{open:'<sub>', close:'</sub>'},
-    monospace:{open:'<source>\n', close:'</source>'}
+    monospace:{open:'<source>\n', close:'</source>\n'}
   };
 
   function convertElement(element, state, result) {
     var tagName = element.tagName;
-    if (!state.inHeader && !tagName) {
-      var sourceElement = element.parentNode;
-      var myStyles = getBasicStyles(sourceElement);
-      for (var style in state.styles) {
-        if (state.styles[style] && !myStyles[style]) {
-          result.push(STYLES[style].close);
-        } else if (!state.styles[style] && myStyles[style]) {
-          result.push(STYLES[style].open);
-        }
+    if (!tagName) {
+      if (!state.inHeader) {
+        updateStyles(element, state, result);
       }
-      state.styles = myStyles;
-    }
-    if (/^H\d$/.test(tagName)) {
+      result.push(convertText(element.nodeValue));
+    } else if (/^H\d$/.test(tagName)) {
       state.inHeader = true;
       simpleWrapChildren(tagName.toLowerCase(), element, state, result);
       state.inHeader = false;
@@ -45,8 +48,6 @@ habraconverter = (function () {
       result.push('<img src="' + element.src + '">');
     } else if ('A' == tagName) {
       wrapChildren('<a href="' + element.href + '">', '</a>', element, state, result);
-    } else if (null == tagName) {
-      result.push(convertText(element.nodeValue));
     } else if ('BR' == tagName) {
       result.push('\n');
     } else if ('HR' == tagName) {
@@ -59,14 +60,30 @@ habraconverter = (function () {
     }
   }
 
+  function updateStyles(element, state, result) {
+    var sourceElement = element.parentNode;
+    var myStyles = getBasicStyles(sourceElement);
+    for (var style in state.styles) {
+      if (state.styles[style] && !myStyles[style]) {
+        var index = result.length - 1;
+        while (index > 0 && /^\s*$/.test(result[index])) {
+          index--;
+        }
+        result.splice(index + 1, 0, STYLES[style].close);
+      } else if (!state.styles[style] && myStyles[style]) {
+        result.push(STYLES[style].open);
+      }
+    }
+    state.styles = myStyles;
+  }
+
   function convertText(text) {
     return text
       .replace(/“|”/g, '"')
-
   }
 
-var NEW_LINE_AFTER_CLOSE_TAG = {table:true, ul:true, ol:true, source:true, li:true,tr:true, h1:true, h2:true, h3:true, h4:true, h5:true, h6:true};
-var NEW_LINE_AFTER_OPEN_TAG = {table:true, ul:true, ol:true, source:true, tr:true};
+  var NEW_LINE_AFTER_CLOSE_TAG = {table:true, ul:true, ol:true, source:true, li:true,tr:true, h1:true, h2:true, h3:true, h4:true, h5:true, h6:true};
+  var NEW_LINE_AFTER_OPEN_TAG = {table:true, ul:true, ol:true, source:true, tr:true};
 
   function simpleWrapChildren(withTag, element, state, result) {
     wrapChildren(
