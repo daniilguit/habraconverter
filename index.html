@@ -1,0 +1,94 @@
+<!DOCTYPE html>
+<html>
+<head>
+    <title>Хабраконвертер</title>
+    <link rel="stylesheet" href="bootstrap.css">
+    <link rel="stylesheet" href="habraconverter.css">
+    
+    <script type="text/javascript" id="qbaka">
+(function (w,d) {w.__qbaka_eh = w.onerror;w.__qbaka_reports=[];w.onerror = function () {
+w.__qbaka_reports.push(arguments);};w.qbaka={exec:function(c){try{c()}catch(e){}},report:function(){},
+_ldr:function(){w.qbaka._ldd=true;},customParams:{},set:function set(p, v){
+qbaka.customParams[p]=v;},exec:function(f){try{f();}catch (e){qbaka.reportException(e);}},
+reportException:function(){}};var e=d.createElement('script');e.id='qbaka';e.type='text/javascript';
+e.async=!0;e.src='//cdn.qbaka.net/reporting.js';var s=d.getElementsByTagName('script')[0];
+s.parentNode.insertBefore(e, s);w.addEventListener?w.addEventListener("load",w.qbaka._ldr,!1):
+w.attachEvent("onload", w.qbaka._ldr);qbaka.key='d124a5c276b4d9f9725425a6e92c83c8';})(window, document);
+</script>
+
+    <script type="text/javascript" src="habraconverter.js"></script>
+    <script>
+        function clearInput() {
+            document.getElementById('rich-input').innerHTML = '';
+        }
+
+        function convertInput() {
+            var converted = habraconverter.convert(document.getElementById('rich-input'));
+            document.getElementById('habra-output').value = converted;
+        }
+    </script>
+</head>
+<body>
+<div class="container">
+    <header><h1>Хабраконвертер</h1></header>
+
+    <div>
+        <p>
+        Хабраконвертер преобразует текст, созданный в текстовом процессоре (Google Docs, Word или любом другом) в
+        размеченный текст, пригодный для публикации статьи на хабре.
+        </p>
+        <p>
+        Поддерживаются жирный/италик/перечекнутый/подчеркнутый/sup/sub стили, ссылки, заголовки, списки, таблицы. Чтобы поддержать
+        вставку исходного кода, весь текст с шрифтом Courier New обрамляется тегом source (атрибут lang, правда, придется
+        вставлять вручную).
+        </p>
+        <p>
+        При вставке из Google Docs картинки вставляются с ссылками на хранилище Google-Docs — просматриваться будут, но стоит их перезалить.
+        </p>
+        <p>
+        <span class="label label-warning">Внимание!</span> К сожалению, конвертация может нарушить форматирование (например, вставить лишние переводы строк). 
+        Проверьте статью внимательно перед тем как ее публиковать!
+        </p>
+    </div>
+
+    <div class="inputs-layout">
+        <div class="input-block">
+            <div class="buttons">
+                <button class="btn btn-success" onclick="convertInput()">Конвертировать</button>
+                <button class="btn" onclick="clearInput()">Очистить</button>
+            </div>
+            <div class="block-description">Скопируйте сюда текст для конвертации</div>
+            <div class="uneditable-input" id="rich-input" contenteditable="true">
+            </div>
+        </div>
+        <div class="output-block">
+            <div class="buttons">
+                <button class="btn" onclick="clearInput()" style="visibility:collapse;">Dummy</button>
+            </div>
+            <div class="block-description">При клике автоматически выделится весь результат</div>
+            <textarea id="habra-output" readonly onclick="this.focus(); this.select();"></textarea>
+        </div>
+    </div>
+</div>
+<footer>
+    <div class="container">
+        <hr>
+    <span class="footer-label">
+        Проект <a href="https://github.com/daniilguit/habraconverter">на github.com</a><br>
+        Ошибки рапортавать <a href="https://github.com/daniilguit/habraconverter/issues">сюда</a><br>
+    </span>
+    </div>
+</footer>
+<script type="text/javascript">
+  var _gaq = _gaq || [];
+  _gaq.push(['_setAccount', 'UA-34415115-1']);
+  _gaq.push(['_trackPageview']);
+
+  (function() {
+    var ga = document.createElement('script'); ga.type = 'text/javascript'; ga.async = true;
+    ga.src = ('https:' == document.location.protocol ? 'https://ssl' : 'http://www') + '.google-analytics.com/ga.js';
+    var s = document.getElementsByTagName('script')[0]; s.parentNode.insertBefore(ga, s);
+  })();
+</script>
+</body>
+</html>

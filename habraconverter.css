@@ -1,0 +1,46 @@
+#rich-input, #habra-output {
+    color: #3d3d3d;
+    box-sizing: border-box;
+    width: 100%;
+    height: 300px;
+}
+
+#rich-input {
+    cursor: auto !important;
+}
+
+div.buttons {
+    margin-top: 2em;
+}
+
+div.inputs-layout {
+    width: 100%;
+    margin-bottom: 2em;
+    margin-top: 0.25em;
+    overflow: hidden;
+}
+
+div.block-description {
+    font-size: 10pt;
+    color: #aaa;
+}
+
+div.inputs-layout>div {
+    width: 460px;
+    float: left;
+}
+
+div.inputs-layout>div:first-child {
+    margin-right: 20px;
+}
+
+
+footer {
+    text-align: right;
+    color: #aaa;
+    font-size: 10pt;
+    padding-bottom: 0.5em;
+}
+footer hr {
+    margin: 0 0 10px 0;
+}
